@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Leaf } from "lucide-react";
+import { Leaf, Info } from "lucide-react";
 
 const Navbar = () => {
   return (
@@ -37,6 +37,13 @@ const Navbar = () => {
               className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors"
             >
               Search & Filter
+            </Link>
+            <Link
+              to="#about"
+              className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center"
+            >
+              <Info className="mr-2 h-4 w-4" />
+              About
             </Link>
           </div>
         </div>

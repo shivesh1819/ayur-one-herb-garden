@@ -1,5 +1,6 @@
 
 import { Link } from "react-router-dom";
+import { Leaf } from "lucide-react";
 
 const Navbar = () => {
   return (
@@ -8,8 +9,12 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center">
-              <div className="h-10 w-10 bg-white rounded-full flex items-center justify-center mr-2">
-                <span className="text-green-700 font-bold text-xl">AO</span>
+              <div className="relative h-10 w-10 bg-white rounded-full flex items-center justify-center mr-2">
+                <span className="text-green-700 font-bold text-xl z-10">AO</span>
+                <Leaf 
+                  className="absolute top-0 left-0 w-full h-full text-green-200 opacity-50 z-0" 
+                  strokeWidth={1.5}
+                />
               </div>
               <span className="text-white font-semibold text-xl">AyurOne</span>
             </Link>

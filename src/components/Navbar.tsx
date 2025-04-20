@@ -17,8 +17,8 @@ const Navbar = () => {
                   AO
                 </span>
                 <Leaf 
-                  className="absolute top-0 left-0 w-full h-full text-green-200 opacity-50 z-0" 
-                  strokeWidth={1.5}
+                  className="absolute top-0 left-0 w-full h-full text-green-400 opacity-70 z-0" 
+                  strokeWidth={2.5}
                 />
               </div>
               <span className="text-white font-semibold text-xl">AyurOne</span>

@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import { TreeDeciduous } from "lucide-react";
 
@@ -10,7 +9,7 @@ const Index = () => {
         <section className="w-full py-12">
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <div className="text-center md:text-left mb-8 md:mb-0">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-green-800">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-green-800 animate-fade-in">
                 Welcome to AyurOne
               </h1>
               <p className="text-xl md:text-2xl text-gray-600 mb-6">
@@ -26,7 +25,6 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Age of Explore Plant section */}
           <div className="max-w-3xl mx-auto mt-12">
             <div className="bg-[#F2FCE2] rounded-xl shadow flex flex-col md:flex-row items-center px-8 py-8 gap-4 border border-green-200">
               <div className="flex-shrink-0 flex items-center mb-4 md:mb-0 md:mr-6">

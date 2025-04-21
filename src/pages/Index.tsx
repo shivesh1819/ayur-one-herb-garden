@@ -1,5 +1,6 @@
 
 import Navbar from "@/components/Navbar";
+import { TreeDeciduous } from "lucide-react";
 
 const Index = () => {
   return (
@@ -22,6 +23,25 @@ const Index = () => {
                 alt="Herbal Garden"
                 className="rounded-xl shadow-lg w-80 h-56 object-cover border-4 border-green-200"
               />
+            </div>
+          </div>
+
+          {/* Age of Explore Plant section */}
+          <div className="max-w-3xl mx-auto mt-12">
+            <div className="bg-[#F2FCE2] rounded-xl shadow flex flex-col md:flex-row items-center px-8 py-8 gap-4 border border-green-200">
+              <div className="flex-shrink-0 flex items-center mb-4 md:mb-0 md:mr-6">
+                <div className="bg-green-100 rounded-full p-4 flex items-center justify-center">
+                  <TreeDeciduous className="text-green-700 w-10 h-10" strokeWidth={2.5} />
+                </div>
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-green-800 mb-2">
+                  Age of Explore Plant
+                </h2>
+                <p className="text-gray-700 text-base">
+                  Embark on a botanical journey and delve into the era when nature and healing were one. Uncover fascinating facts about ancient plants, their longevity, and their roles in Ayurveda’s rich history. Ready to explore the wisdom of the oldest herbs?
+                </p>
+              </div>
             </div>
           </div>
         </section>

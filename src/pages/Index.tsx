@@ -6,17 +6,23 @@ const Index = () => {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
       <main className="flex flex-1 items-center justify-center">
-        <section className="w-full text-center py-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-green-800">Welcome to AyurOne</h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-6">
-            Explore our virtual herbal garden and discover the power of ancient Ayurvedic plants.
-          </p>
-          <div className="flex justify-center">
-            <img
-              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80"
-              alt="Herbal Garden"
-              className="rounded-xl shadow-lg w-80 h-56 object-cover border-4 border-green-200"
-            />
+        <section className="w-full py-12">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div className="text-center md:text-left mb-8 md:mb-0">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-green-800">
+                Welcome to AyurOne
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-600 mb-6">
+                Explore our virtual herbal garden and discover the power of ancient Ayurvedic plants.
+              </p>
+            </div>
+            <div className="flex justify-center md:justify-end">
+              <img
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=500&q=80"
+                alt="Herbal Garden"
+                className="rounded-xl shadow-lg w-80 h-56 object-cover border-4 border-green-200"
+              />
+            </div>
           </div>
         </section>
       </main>

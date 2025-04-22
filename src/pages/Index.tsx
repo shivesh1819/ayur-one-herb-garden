@@ -1,5 +1,13 @@
 import Navbar from "@/components/Navbar";
 import { TreeDeciduous } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const Index = () => {
   return (
@@ -41,6 +49,54 @@ const Index = () => {
                 </p>
               </div>
             </div>
+          </div>
+
+          <div className="max-w-5xl mx-auto mt-16">
+            <h2 className="text-3xl font-bold text-center text-green-800 mb-8">
+              Discover Our Herbal Collection
+            </h2>
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {[
+                  {
+                    src: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07",
+                    alt: "Orange flowers in bloom",
+                  },
+                  {
+                    src: "https://images.unsplash.com/photo-1518495973542-4542c06a5843",
+                    alt: "Sunlight through green leaves",
+                  },
+                  {
+                    src: "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843",
+                    alt: "Forest with sunbeams",
+                  },
+                  {
+                    src: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9",
+                    alt: "Pine trees in nature",
+                  },
+                ].map((image, index) => (
+                  <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                    <div className="overflow-hidden rounded-xl border border-green-200">
+                      <AspectRatio ratio={4/3}>
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
+                        />
+                      </AspectRatio>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex" />
+              <CarouselNext className="hidden md:flex" />
+            </Carousel>
           </div>
         </section>
       </main>

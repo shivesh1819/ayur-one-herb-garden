@@ -1,52 +1,74 @@
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Leaf } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import PlantDetails from "@/components/PlantDetails";
+import { useState } from "react";
 
 const ExplorePlants = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+
   const plants = [
     {
-      name: "Tulsi (Holy Basil)",
-      description: "A sacred plant in Ayurvedic medicine known for its healing properties.",
+      name: "Tulsi (Ocimum sanctum)",
+      commonNames: "Holy Basil, Sacred Basil",
+      habitat: "Native to India, commonly found in gardens.",
+      medicinalUses: "Known for its anti-inflammatory, anti-viral, and antioxidant properties.",
+      cultivation: "Prefers warm climates and well-drained soil. Grows well in pots or garden beds.",
       image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07",
+      learnMoreUrl: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4296439/",
     },
     {
-      name: "Neem",
-      description: "A powerful medicinal plant used in traditional Ayurvedic treatments.",
+      name: "Ashwagandha (Withania somnifera)",
+      commonNames: "Indian Ginseng, Winter Cherry",
+      habitat: "Native to India, grows well in arid regions.",
+      medicinalUses: "Adaptogen, helps reduce stress and anxiety, boosts immunity.",
+      cultivation: "Prefers dry, well-drained soil and full sunlight.",
       image: "https://images.unsplash.com/photo-1518495973542-4542c06a5843",
+      learnMoreUrl: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3573577/",
     },
     {
-      name: "Ashwagandha",
-      description: "An ancient medicinal herb known for its adaptogenic properties.",
+      name: "Turmeric (Curcuma longa)",
+      commonNames: "Haldi, Indian Saffron",
+      habitat: "Native to Southeast Asia, requires a warm, humid climate.",
+      medicinalUses: "Anti-inflammatory, antioxidant, used in digestive health.",
+      cultivation: "Grows in rich, well-drained soil with ample rainfall.",
       image: "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843",
+      learnMoreUrl: "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5664031/",
     },
   ];
+
+  const filteredPlants = plants.filter((plant) =>
+    plant.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
       <main className="flex-1 container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-green-800 mb-8">Explore Ayurvedic Plants</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {plants.map((plant, index) => (
-            <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <CardContent className="p-0">
-                <div className="relative h-48">
-                  <img
-                    src={plant.image}
-                    alt={plant.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                    <Leaf className="text-white w-12 h-12" />
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="text-xl font-semibold text-green-800 mb-2">{plant.name}</h3>
-                  <p className="text-gray-600">{plant.description}</p>
-                </div>
-              </CardContent>
-            </Card>
+        
+        <div className="mb-8 flex gap-4">
+          <Input
+            type="text"
+            placeholder="Search for plants..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="max-w-md"
+          />
+          <Button className="bg-green-600 hover:bg-green-700">
+            <Search className="h-4 w-4 mr-2" />
+            Search
+          </Button>
+        </div>
+
+        <div className="space-y-8">
+          {filteredPlants.map((plant, index) => (
+            <PlantDetails
+              key={index}
+              {...plant}
+            />
           ))}
         </div>
       </main>

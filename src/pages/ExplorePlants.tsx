@@ -44,34 +44,45 @@ const ExplorePlants = () => {
   );
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-green-800 mb-8">Explore Ayurvedic Plants</h1>
-        
-        <div className="mb-8 flex gap-4">
+      
+      <header className="bg-gradient-to-b from-green-400 to-green-700 text-white py-8 text-center shadow-lg">
+        <h1 className="text-4xl font-bold mb-4 drop-shadow-md">
+          Explore Ayurvedic Plants
+        </h1>
+      </header>
+
+      <main className="flex-1 p-8 bg-white">
+        <div className="mb-8 flex justify-center gap-4">
           <Input
             type="text"
             placeholder="Search for plants..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="max-w-md"
+            className="max-w-md border border-gray-300 rounded-md px-4 py-2 w-80"
           />
-          <Button className="bg-green-600 hover:bg-green-700">
+          <Button className="bg-green-600 hover:bg-green-700 text-white px-6">
             <Search className="h-4 w-4 mr-2" />
             Search
           </Button>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-8 max-w-7xl mx-auto">
           {filteredPlants.map((plant, index) => (
-            <PlantDetails
+            <div
               key={index}
-              {...plant}
-            />
+              className="bg-[url('/model-container-background.jpg')] bg-center bg-cover rounded-xl shadow-lg p-6"
+            >
+              <PlantDetails {...plant} />
+            </div>
           ))}
         </div>
       </main>
+
+      <footer className="bg-gradient-to-b from-green-700 to-green-400 text-white text-center py-6 mt-8 shadow-inner">
+        <p>© 2024 Ayurvedic Plants. All rights reserved.</p>
+      </footer>
     </div>
   );
 };

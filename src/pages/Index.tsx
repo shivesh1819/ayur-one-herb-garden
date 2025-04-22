@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import { TreeDeciduous } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   Carousel,
   CarouselContent,
@@ -34,21 +35,23 @@ const Index = () => {
           </div>
 
           <div className="max-w-3xl mx-auto mt-12">
-            <div className="bg-[#F2FCE2] rounded-xl shadow flex flex-col md:flex-row items-center px-8 py-8 gap-4 border border-green-200">
-              <div className="flex-shrink-0 flex items-center mb-4 md:mb-0 md:mr-6">
-                <div className="bg-green-100 rounded-full p-4 flex items-center justify-center">
-                  <TreeDeciduous className="text-green-700 w-10 h-10" strokeWidth={2.5} />
+            <Link to="/explore-plants" className="block hover:transform hover:scale-105 transition-transform">
+              <div className="bg-[#F2FCE2] rounded-xl shadow flex flex-col md:flex-row items-center px-8 py-8 gap-4 border border-green-200">
+                <div className="flex-shrink-0 flex items-center mb-4 md:mb-0 md:mr-6">
+                  <div className="bg-green-100 rounded-full p-4 flex items-center justify-center">
+                    <TreeDeciduous className="text-green-700 w-10 h-10" strokeWidth={2.5} />
+                  </div>
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-green-800 mb-2">
+                    Age of Explore Plant
+                  </h2>
+                  <p className="text-gray-700 text-base">
+                    Embark on a botanical journey and delve into the era when nature and healing were one. Uncover fascinating facts about ancient plants, their longevity, and their roles in Ayurveda’s rich history. Ready to explore the wisdom of the oldest herbs?
+                  </p>
                 </div>
               </div>
-              <div>
-                <h2 className="text-2xl font-bold text-green-800 mb-2">
-                  Age of Explore Plant
-                </h2>
-                <p className="text-gray-700 text-base">
-                  Embark on a botanical journey and delve into the era when nature and healing were one. Uncover fascinating facts about ancient plants, their longevity, and their roles in Ayurveda’s rich history. Ready to explore the wisdom of the oldest herbs?
-                </p>
-              </div>
-            </div>
+            </Link>
           </div>
 
           <div className="max-w-5xl mx-auto mt-16">
@@ -82,15 +85,17 @@ const Index = () => {
                   },
                 ].map((image, index) => (
                   <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                    <div className="overflow-hidden rounded-xl border border-green-200">
-                      <AspectRatio ratio={4/3}>
-                        <img
-                          src={image.src}
-                          alt={image.alt}
-                          className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
-                        />
-                      </AspectRatio>
-                    </div>
+                    <Link to="/explore-plants" className="block">
+                      <div className="overflow-hidden rounded-xl border border-green-200 group">
+                        <AspectRatio ratio={4/3}>
+                          <img
+                            src={image.src}
+                            alt={image.alt}
+                            className="object-cover w-full h-full transition-all duration-500 group-hover:scale-110 group-hover:brightness-90"
+                          />
+                        </AspectRatio>
+                      </div>
+                    </Link>
                   </CarouselItem>
                 ))}
               </CarouselContent>

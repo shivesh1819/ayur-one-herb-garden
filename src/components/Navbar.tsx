@@ -27,7 +27,7 @@ const Navbar = () => {
           
           <div className="hidden sm:flex sm:space-x-8">
             <Link
-              to="#plants"
+              to="/explore-plants"
               className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors"
             >
               Explore Plants

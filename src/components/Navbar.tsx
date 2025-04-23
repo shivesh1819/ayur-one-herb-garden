@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Leaf, Info } from "lucide-react";
+import { Leaf, Info, MessageSquare } from "lucide-react";
 
 const Navbar = () => {
   return (
@@ -33,10 +33,11 @@ const Navbar = () => {
               Explore Plants
             </Link>
             <Link
-              to="#search"
-              className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              to="/chat"
+              className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center"
             >
-              Search & Filter
+              <MessageSquare className="mr-2 h-4 w-4" />
+              Chat
             </Link>
             <Link
               to="#about"

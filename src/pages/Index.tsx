@@ -1,5 +1,6 @@
+
 import Navbar from "@/components/Navbar";
-import { TreeDeciduous } from "lucide-react";
+import { TreeDeciduous, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Carousel,

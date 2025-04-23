@@ -105,6 +105,44 @@ const Index = () => {
           </div>
         </section>
       </main>
+      <section id="about" className="py-16 bg-white">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-green-800 mb-8">
+            About AyurOne
+          </h2>
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <p className="text-lg text-gray-600">
+                AyurOne is your trusted companion in exploring the ancient wisdom of Ayurvedic medicine. 
+                Our platform brings together centuries-old knowledge of medicinal plants and modern technology 
+                to help you discover natural healing solutions.
+              </p>
+              <p className="text-lg text-gray-600">
+                With our virtual doctor consultation and extensive plant database, 
+                we make it easier for you to access traditional Ayurvedic knowledge 
+                and connect with experienced practitioners.
+              </p>
+              <div className="pt-4">
+                <Link 
+                  to="/chat" 
+                  className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
+                >
+                  <MessageSquare className="mr-2 h-5 w-5" />
+                  Consult with Doctor
+                </Link>
+              </div>
+            </div>
+            <div className="relative">
+              <img
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb"
+                alt="Nature"
+                className="rounded-2xl shadow-xl"
+              />
+              <div className="absolute inset-0 bg-green-800/10 rounded-2xl" />
+            </div>
+          </div>
+        </div>
+      </section>
       <footer className="bg-green-700 py-6 text-center text-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="mb-4 text-lg font-semibold">Contact Us</div>

@@ -37,10 +37,10 @@ const Navbar = () => {
               className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center"
             >
               <MessageSquare className="mr-2 h-4 w-4" />
-              Chat
+              Doctor
             </Link>
             <Link
-              to="#about"
+              to="/#about"
               className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center"
             >
               <Info className="mr-2 h-4 w-4" />

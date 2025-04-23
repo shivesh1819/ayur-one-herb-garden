@@ -1,8 +1,17 @@
 
+import React from 'react';
 import { Link } from "react-router-dom";
 import { Leaf, Info, MessageSquare } from "lucide-react";
 
 const Navbar = () => {
+  const scrollToAbout = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className="bg-gradient-to-r from-green-600 to-green-800 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,13 +48,14 @@ const Navbar = () => {
               <MessageSquare className="mr-2 h-4 w-4" />
               Doctor
             </Link>
-            <Link
-              to="/#about"
+            <a
+              href="#about"
+              onClick={scrollToAbout}
               className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center"
             >
               <Info className="mr-2 h-4 w-4" />
               About
-            </Link>
+            </a>
           </div>
         </div>
       </div>

@@ -1,13 +1,21 @@
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
+import { Search, Filter } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import PlantDetails from "@/components/PlantDetails";
 import { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const ExplorePlants = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [filterCategory, setFilterCategory] = useState("all");
 
   const plants = [
     {
@@ -39,9 +47,13 @@ const ExplorePlants = () => {
     },
   ];
 
-  const filteredPlants = plants.filter((plant) =>
-    plant.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredPlants = plants.filter((plant) => {
+    const matchesSearch = plant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         plant.commonNames.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = filterCategory === "all" || 
+                          plant.medicinalUses.toLowerCase().includes(filterCategory.toLowerCase());
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -54,17 +66,36 @@ const ExplorePlants = () => {
       </header>
 
       <main className="flex-1 p-8 bg-white">
-        <div className="mb-8 flex justify-center gap-4">
-          <Input
-            type="text"
-            placeholder="Search for plants..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="max-w-md border border-gray-300 rounded-md px-4 py-2 w-80"
-          />
+        <div className="mb-8 flex flex-col md:flex-row justify-center items-center gap-4">
+          <div className="relative flex-1 max-w-md">
+            <Input
+              type="text"
+              placeholder="Search for plants..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 border-green-200 focus:border-green-500"
+            />
+            <Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+          </div>
+          
+          <Select
+            value={filterCategory}
+            onValueChange={setFilterCategory}
+          >
+            <SelectTrigger className="w-[200px]">
+              <SelectValue placeholder="Filter by property" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Properties</SelectItem>
+              <SelectItem value="anti-inflammatory">Anti-inflammatory</SelectItem>
+              <SelectItem value="antioxidant">Antioxidant</SelectItem>
+              <SelectItem value="digestive">Digestive Health</SelectItem>
+            </SelectContent>
+          </Select>
+
           <Button className="bg-green-600 hover:bg-green-700 text-white px-6">
-            <Search className="h-4 w-4 mr-2" />
-            Search
+            <Filter className="h-4 w-4 mr-2" />
+            Filter
           </Button>
         </div>
 

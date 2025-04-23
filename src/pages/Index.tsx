@@ -1,6 +1,5 @@
-
 import Navbar from "@/components/Navbar";
-import { TreeDeciduous, MessageSquare } from "lucide-react";
+import { TreeDeciduous } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Carousel,
@@ -123,15 +122,6 @@ const Index = () => {
                 we make it easier for you to access traditional Ayurvedic knowledge 
                 and connect with experienced practitioners.
               </p>
-              <div className="pt-4">
-                <Link 
-                  to="/chat" 
-                  className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors"
-                >
-                  <MessageSquare className="mr-2 h-5 w-5" />
-                  Consult with Doctor
-                </Link>
-              </div>
             </div>
             <div className="relative">
               <img

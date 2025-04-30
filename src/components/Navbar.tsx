@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Leaf, Info, MessageSquare } from "lucide-react";
+import { Leaf, Info, MessageSquare, Home } from "lucide-react";
 
 const Navbar = () => {
   const scrollToAbout = (e: React.MouseEvent) => {
@@ -35,6 +35,13 @@ const Navbar = () => {
           </div>
           
           <div className="hidden sm:flex sm:space-x-8">
+            <Link
+              to="/"
+              className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center"
+            >
+              <Home className="mr-2 h-4 w-4" />
+              Home
+            </Link>
             <Link
               to="/explore-plants"
               className="text-white hover:bg-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors"

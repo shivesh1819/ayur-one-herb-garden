@@ -3,16 +3,18 @@ import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Search } from "lucide-react";
+import { Send, Search, Camera } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useSearch } from "@/context/SearchContext";
 import { Link } from "react-router-dom";
 import { getPlantInfo } from "@/data/plantsData";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 interface Message {
   type: "user" | "assistant";
   content: string;
+  image?: string;
 }
 
 const AyurvedaChat = () => {
@@ -26,6 +28,10 @@ const AyurvedaChat = () => {
   const [input, setInput] = useState("");
   const { toast } = useToast();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isCameraOn, setIsCameraOn] = useState(false);
+  const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
 
   // Handle incoming search queries
   useEffect(() => {
@@ -54,6 +60,15 @@ const AyurvedaChat = () => {
       }
     }
   }, [messages]);
+
+  // Clean up camera resources when component unmounts
+  useEffect(() => {
+    return () => {
+      if (cameraStream) {
+        cameraStream.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, [cameraStream]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,6 +122,79 @@ const AyurvedaChat = () => {
     setSearchQuery(input);
   };
 
+  const startCamera = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        video: { facingMode: "environment" } 
+      });
+      
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+      
+      setCameraStream(stream);
+      setIsCameraOn(true);
+      
+      toast({
+        title: "Camera activated",
+        description: "You can now take a photo of a plant for identification.",
+      });
+    } catch (error) {
+      console.error("Error accessing camera:", error);
+      toast({
+        variant: "destructive",
+        title: "Camera access denied",
+        description: "Please allow camera access to use this feature.",
+      });
+    }
+  };
+
+  const stopCamera = () => {
+    if (cameraStream) {
+      cameraStream.getTracks().forEach(track => track.stop());
+      setCameraStream(null);
+      setIsCameraOn(false);
+    }
+  };
+
+  const capturePhoto = () => {
+    if (videoRef.current && canvasRef.current) {
+      const video = videoRef.current;
+      const canvas = canvasRef.current;
+      
+      // Set canvas dimensions to match the video
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      
+      // Draw the current video frame to the canvas
+      const context = canvas.getContext('2d');
+      if (context) {
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+        // Convert canvas to data URL
+        const imageDataUrl = canvas.toDataURL('image/jpeg');
+        
+        // Add the image to messages
+        setMessages(prev => [...prev, {
+          type: "user",
+          content: "I took a photo of this plant. Can you identify it?",
+          image: imageDataUrl
+        }]);
+        
+        // Add a response
+        setTimeout(() => {
+          setMessages(prev => [...prev, {
+            type: "assistant",
+            content: "Thanks for sharing the image! While I can't identify plants from images yet, you can try describing it or searching for common Ayurvedic plants in our database.",
+          }]);
+        }, 1000);
+        
+        // Stop the camera after taking a photo
+        stopCamera();
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
@@ -128,6 +216,13 @@ const AyurvedaChat = () => {
                       : "bg-white/90 text-gray-800"
                   }`}
                 >
+                  {message.image && (
+                    <img 
+                      src={message.image} 
+                      alt="Captured plant" 
+                      className="w-full max-h-60 object-contain mb-2 rounded"
+                    />
+                  )}
                   {message.content}
                 </div>
               </div>
@@ -147,6 +242,48 @@ const AyurvedaChat = () => {
               <Send className="h-4 w-4" />
             </Button>
           </form>
+          
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button 
+                type="button" 
+                className="bg-green-600 hover:bg-green-700 flex items-center gap-2"
+                onClick={startCamera}
+              >
+                <Camera className="h-4 w-4" />
+                <span className="hidden sm:inline">Camera</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="bottom" className="h-[70vh]">
+              <div className="flex flex-col items-center justify-center h-full gap-4">
+                <div className="relative w-full max-w-md aspect-[3/4] bg-black rounded-lg overflow-hidden">
+                  <video 
+                    ref={videoRef} 
+                    autoPlay 
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <canvas ref={canvasRef} className="hidden" />
+                </div>
+                <div className="flex gap-4">
+                  <Button 
+                    onClick={capturePhoto} 
+                    className="bg-green-600 hover:bg-green-700"
+                    disabled={!isCameraOn}
+                  >
+                    Take Photo
+                  </Button>
+                  <Button 
+                    onClick={stopCamera} 
+                    variant="outline"
+                    disabled={!isCameraOn}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
           
           <Button 
             type="button" 
